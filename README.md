@@ -136,6 +136,7 @@ All requests use bearer token authentication:
 ```http
 Authorization: Bearer <TOKEN>
 Content-Type: application/json
+```
 
 ---
 
