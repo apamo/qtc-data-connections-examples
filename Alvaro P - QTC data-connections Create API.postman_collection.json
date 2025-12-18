@@ -1,0 +1,1163 @@
+{
+	"info": {
+		"_postman_id": "b87bc7fc-c8b9-484d-a9d1-ba8389143524",
+		"name": "QTC Connections",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11847420",
+		"_collection_link": "https://qlik-isv-presales-team.postman.co/workspace/Qlik-ISV-Presales-Team-Workspac~f8bca74f-46af-4a60-860a-5355c93cfc22/collection/11847420-b87bc7fc-c8b9-484d-a9d1-ba8389143524?action=share&source=collection_link&creator=11847420"
+	},
+	"item": [
+		{
+			"name": "List Connections",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://{{hostname}}/api/v1/data-connections",
+					"protocol": "https",
+					"host": [
+						"{{hostname}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"data-connections"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve Connection Properties By Id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://{{hostname}}/api/v1/data-connections/{{snowflakeConnectionId}}?parseConnection=true",
+					"protocol": "https",
+					"host": [
+						"{{hostname}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"data-connections",
+						"{{snowflakeConnectionId}}"
+					],
+					"query": [
+						{
+							"key": "parseConnection",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Data Sources",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://{{hostname}}/api/v1/data-sources",
+					"protocol": "https",
+					"host": [
+						"{{hostname}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"data-sources"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve Data Source Properties",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://{{hostname}}/api/v1/data-sources/reptgt_qdisnowflake/api-specs",
+					"protocol": "https",
+					"host": [
+						"{{hostname}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"data-sources",
+						"reptgt_qdisnowflake",
+						"api-specs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create MySQL Source",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json();\r",
+							"\r",
+							"pm.collectionVariables.set(\"connectionId\", responseJson.id);"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"dataSourceId\": \"repsrc_mysql\",\r\n  \"qName\": \"SRC_MySQL_AutoGen_01\",\r\n  \"space\": \"{{spaceId}}\",\r\n  \"connectionProperties\": {\r\n    \"agentId\": \"{{gatewayId}}\",\r\n    \"server\": \"172.21.20.129\",\r\n    \"port\": \"3306\",\r\n    \"username\": \"{{rdbmsUsername}}\",\r\n    \"password\": \"{{rdbmsPassword}}\",\r\n    \"replicateEndpointType\": \"mysql###None\",\r\n    \"sshEnable\": false,\r\n    \"sslMode\": \"PREFER\",\r\n    \"eventsPollInterval\": \"5\"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{hostname}}/api/v1/data-connections",
+					"protocol": "https",
+					"host": [
+						"{{hostname}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"data-connections"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create MySQL Target",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json();\r",
+							"\r",
+							"pm.collectionVariables.set(\"connectionId\", responseJson.id);"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"dataSourceId\": \"reptgt_qdimysql\",\r\n  \"qName\": \"TGT_MySQL_AutoGen_01\",\r\n  \"space\": \"{{spaceId}}\",\r\n  \"connectionProperties\": {\r\n    \"agentId\": \"{{gatewayId}}\",\r\n    \"server\": \"172.21.20.129\",\r\n    \"port\": \"3306\",\r\n    \"username\": \"{{rdbmsUsername}}\",\r\n    \"password\": \"{{rdbmsPassword}}\",\r\n    \"replicateEndpointType\": \"mysqltarget###None\",\r\n    \"targetDbType\": \"MULTIPLE_DATABASES\",\r\n    \"maxFileSize\": \"32000\",\r\n    \"parallelLoadThreads\": \"2\"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{hostname}}/api/v1/data-connections",
+					"protocol": "https",
+					"host": [
+						"{{hostname}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"data-connections"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create MSSQL Server Source",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json();\r",
+							"\r",
+							"pm.collectionVariables.set(\"connectionId\", responseJson.id);"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"dataSourceId\": \"repsrc_mssql\",\r\n  \"qName\": \"SRC_SQLServer_AutoGen_01\",\r\n  \"space\": \"{{spaceId}}\",\r\n  \"connectionProperties\": {\r\n    \"agentId\": \"{{gatewayId}}\",\r\n    \"server\": \"172.21.20.143\",\r\n    \"username\": \"{{mssqlUsername}}\",\r\n    \"password\": \"{{mssqlPassword}}\",\r\n    \"replicateEndpointType\": \"sqlServer###None\",\r\n    \"useEncryptedConnection\": false,\r\n    \"databaseManualInput\": false,\r\n    \"database\": \"AdventureWorksDW2017\",\r\n    \"safeguardPolicy\": \"RELY_ON_SQL_SERVER_REPLICATION_AGENT\",\r\n    \"safeguardFrequency\": \"300\",\r\n    \"TlogAccessMode\": \"PreferTlog\",\r\n    \"useWindowsAuthentication\": false,\r\n    \"use3rdPartyBackupDevice\": false\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{hostname}}/api/v1/data-connections",
+					"protocol": "https",
+					"host": [
+						"{{hostname}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"data-connections"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create MSSQL Server Target",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json();\r",
+							"\r",
+							"pm.collectionVariables.set(\"connectionId\", responseJson.id);"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"dataSourceId\": \"reptgt_mssqltarget\",\r\n  \"qName\": \"TGT_SQLServer_AutoGen_01\",\r\n  \"space\": \"{{spaceId}}\",\r\n  \"connectionProperties\": {\r\n    \"agentId\": \"{{gatewayId}}\",\r\n    \"server\": \"172.21.20.143\",\r\n    \"username\": \"{{mssqlUsername}}\",\r\n    \"password\": \"{{mssqlPassword}}\",\r\n    \"replicateEndpointType\": \"sqlServer###None\",\r\n    \"AuthenticationModes\": \"SQL_CREDENTIALS\",\r\n    \"useEncryptedConnection\": false,\r\n    \"useWindowsAuthentication\": false,\r\n    \"suspendTableWithComputedColumn\": true,\r\n    \"databaseManualInput\": false,\r\n    \"database\": \"AdventureWorksDW2017\"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{hostname}}/api/v1/data-connections",
+					"protocol": "https",
+					"host": [
+						"{{hostname}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"data-connections"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Postgres Source",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json();\r",
+							"\r",
+							"pm.collectionVariables.set(\"connectionId\", responseJson.id);"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"dataSourceId\": \"repsrc_postgresql\",\r\n  \"qName\": \"SRC_Postgres_AutoGen_03\",\r\n  \"space\": \"{{spaceId}}\",\r\n  \"connectionProperties\": {\r\n    \"agentId\": \"{{gatewayId}}\",\r\n    \"server\": \"172.21.20.129\",\r\n    \"port\": \"5432\",\r\n    \"username\": \"{{rdbmsUsername}}\",\r\n    \"password\": \"{{rdbmsPassword}}\",\r\n    \"replicateEndpointType\": \"postgresqlsource###None\",\r\n    \"database\": \"Adventureworks\",\r\n    \"sslMode\": \"PREFER\",\r\n    \"sslCompression\": true,\r\n    \"captureDDLs\": true,\r\n    \"heartbeatEnable\": false,\r\n    \"ddlArtifactsSchema\": \"public\"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{hostname}}/api/v1/data-connections",
+					"protocol": "https",
+					"host": [
+						"{{hostname}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"data-connections"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Postgres Target",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json();\r",
+							"\r",
+							"pm.collectionVariables.set(\"connectionId\", responseJson.id);"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"dataSourceId\": \"reptgt_qdipostgresql\",\r\n  \"qName\": \"TGT_Postgres_AutoGen_01\",\r\n  \"space\": \"{{spaceId}}\",\r\n  \"connectionProperties\": {\r\n    \"agentId\": \"{{gatewayId}}\",\r\n    \"host\": \"172.21.20.129\",\r\n    \"port\": \"5432\",\r\n    \"username\": \"{{mysqlUsername}}\",\r\n    \"password\": \"{{mysqlPassword}}\",\r\n    \"replicateEndpointType\": \"postgresql###None\",\r\n    \"database\": \"Adventureworks\",\r\n    \"sslMode\": \"PREFER\",\r\n    \"sslCompression\": true,\r\n    \"maxFileSize\": \"32000\"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{hostname}}/api/v1/data-connections",
+					"protocol": "https",
+					"host": [
+						"{{hostname}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"data-connections"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Oracle Source",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json();\r",
+							"\r",
+							"pm.collectionVariables.set(\"connectionId\", responseJson.id);"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"dataSourceId\": \"repsrc_oracle\",\r\n  \"qName\": \"SRC_Oracle_AutoGen_01\",\r\n  \"space\": \"{{spaceId}}\",\r\n  \"connectionProperties\": {\r\n    \"agentId\": \"{{gatewayId}}\",\r\n    \"server\": \"//172.21.20.129:1521/ORCLPDB1\",\r\n    \"username\": \"{{rdbmsUsername}}\",\r\n    \"password\": \"{{rdbmsPassword}}\",\r\n    \"numberDatatypeScale\": \"10\",\r\n    \"allowSelectNestedTables\": false,\r\n    \"replicateInvisibleColumns\": false,\r\n    \"retryInterval\": \"5\",\r\n    \"archivedLogDestId\": \"0\",\r\n    \"additionalArchivedLogDestId\": \"0\",\r\n    \"archivedLogsOnly\": false,\r\n    \"useLogminerReader\": false,\r\n    \"parallelASMReadThreads\": \"1\"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{hostname}}/api/v1/data-connections",
+					"protocol": "https",
+					"host": [
+						"{{hostname}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"data-connections"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Oracle Target",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json();\r",
+							"\r",
+							"pm.collectionVariables.set(\"connectionId\", responseJson.id);"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"dataSourceId\": \"reptgt_qdioracle\",\r\n  \"qName\": \"TGT_Oracle_AutoGen_01\",\r\n  \"space\": \"{{spaceId}}\",\r\n  \"connectionProperties\": {\r\n    \"agentId\": \"{{gatewayId}}\",\r\n    \"server\": \"//172.21.20.129:1521/ORCLPDB1\",\r\n    \"username\": \"{{rdbmsUsername}}\",\r\n    \"password\": \"{{rdbmsPassword}}\"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{hostname}}/api/v1/data-connections",
+					"protocol": "https",
+					"host": [
+						"{{hostname}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"data-connections"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create ADLS Target",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json();\r",
+							"\r",
+							"pm.collectionVariables.set(\"connectionId\", responseJson.id);"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"dataSourceId\": \"reptgt_qdiadls\",\r\n  \"qName\": \"TGT_ADLS_AutoGen_01\",\r\n  \"space\": \"{{spaceId}}\",\r\n  \"connectionProperties\": {\r\n    \"agentId\": \"$$qlikManagedGateway$$\",\r\n    \"adlsLoginUrl\": \"https://login.microsoftonline.com/\",\r\n    \"storageAccount\": \"qmiadlsgen2ac834a628f\",\r\n    \"fileSystem\": \"qmicontainer\",\r\n    \"adlstenantid\": \"c21eeb5f-f5a6-44e8-a997-124f2f7a497c\",\r\n    \"adlsclientappid\": \"{{adlsclientappid}}\",\r\n    \"adlsclientappkey\": \"{{adlsclientappkey}}\"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{hostname}}/api/v1/data-connections",
+					"protocol": "https",
+					"host": [
+						"{{hostname}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"data-connections"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create S3 Target",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json();\r",
+							"pm.collectionVariables.set(\"connectionId\", responseJson.id);"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"dataSourceId\": \"reptgt_qdis3\",\r\n    \"qName\": \"TGT_S3_AutoGen_02\",\r\n    \"space\": \"{{spaceId}}\",\r\n    \"connectionProperties\": {\r\n        \"agentId\": \"$$qlikManagedGateway$$\",\r\n        \"bucketName\": \"{{s3bucketName}}\",\r\n        \"s3AccessKey\": \"{{s3accessKey}}\",\r\n        \"s3SecretKey\": \"{{s3secretKey}}\",\r\n        \"useAwsPrivateLink\": false\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{hostname}}/api/v1/data-connections",
+					"protocol": "https",
+					"host": [
+						"{{hostname}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"data-connections"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Snowflake Target",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json();\r",
+							"pm.collectionVariables.set(\"connectionId\", responseJson.id);"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"dataSourceId\": \"reptgt_qdisnowflake\",\r\n  \"qName\": \"TGT_SNOW_AutoGen_03\",\r\n  \"space\": \"{{spaceId}}\",\r\n  \"connectionProperties\": {\r\n    \"server\": \"attunity.snowflakecomputing.com\",\r\n    \"port\": \"443\",\r\n    \"databaseManualInput\": true,\r\n    \"databaseQcsString\": \"ALP_QTC_NEW\",\r\n    \"warehouse\": \"SALES_WH\",\r\n    \"username\":\"alp@qlik.com\",\r\n    \"authentication_mode\": \"KEY_PAIR\",\r\n    \"privateKeyFile\": [\r\n        {\r\n            \"name\": \"snowflake_rsa_key.p8\",\r\n            \"value\": \"{{snowflakeEncodedValue}}\"\r\n        }\r\n    ],\r\n    \"privateKeyPassphrase\": \"{{snowflakePassPhrase}}\"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{hostname}}/api/v1/data-connections",
+					"protocol": "https",
+					"host": [
+						"{{hostname}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"data-connections"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Databricks Target",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json();\r",
+							"pm.collectionVariables.set(\"connectionId\", responseJson.id);"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"dataSourceId\": \"reptgt_qdidatabricks\",\r\n    \"qName\": \"TGT_Databricks_AutoGen_01\",\r\n    \"space\": \"{{spaceId}}\",\r\n    \"connectionProperties\": {\r\n        \"server\": \"adb-2222128818584755.15.azuredatabricks.net\",\r\n        \"port\": \"443\",\r\n        \"httpPath\": \"/sql/1.0/warehouses/b4c9bf8cc1b26850\",\r\n        \"password\": \"{{databricksToken}}\",\r\n        \"authenticationMode\": \"PERSONAL_ACCESS_TOKEN\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{hostname}}/api/v1/data-connections",
+					"protocol": "https",
+					"host": [
+						"{{hostname}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"data-connections"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create BigQuery Target",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json();\r",
+							"pm.collectionVariables.set(\"connectionId\", responseJson.id);"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"dataSourceId\": \"reptgt_qdibigquery\",\r\n  \"qName\": \"TGT_BIGQ_AutoGen_02\",\r\n  \"space\": \"{{spaceId}}\",\r\n  \"connectionProperties\": {\r\n    \"datasetLocation\": \"ASIA_SOUTHEAST1\",\r\n    \"jsonCredentials\": [\r\n      {\r\n        \"name\": \"my-service-account.json\",\r\n        \"value\": \"{{bigQueryEncodedValue}}\"\r\n      }\r\n    ]\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{hostname}}/api/v1/data-connections",
+					"protocol": "https",
+					"host": [
+						"{{hostname}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"data-connections"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create GCS Target",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json();\r",
+							"pm.collectionVariables.set(\"connectionId\", responseJson.id);"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"dataSourceId\": \"reptgt_qdigooglecloudstorage\",\r\n  \"qName\": \"TGT_GCS_AutoGen_01\",\r\n  \"space\": \"{{spaceId}}\",\r\n  \"connectionProperties\": {\r\n    \"agentId\": \"$$qlikManagedGateway$$\",\r\n    \"bucketName\": \"qmi-6916f619303de63218d9662b\",\r\n    \"jsonCredentials\": [\r\n      {\r\n        \"name\": \"my-service-account.json\",\r\n        \"value\": \"{{bigQueryEncodedValue}}\"\r\n      }\r\n    ]\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{hostname}}/api/v1/data-connections",
+					"protocol": "https",
+					"host": [
+						"{{hostname}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"data-connections"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update BigQuery Certificate",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"op\": \"replace\",\r\n        \"path\": \"/connectionProperties/jsonCredentials/value\",\r\n        \"Value\": \"{{bigQueryEncodedValue}}\"\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{hostname}}/api/v1/data-connections/{{connectionId}}",
+					"protocol": "https",
+					"host": [
+						"{{hostname}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"data-connections",
+						"{{connectionId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Connection User and Pass",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"op\": \"replace\",\r\n        \"path\": \"/connectionProperties/password\",\r\n        \"value\": \"Qlik1234\"\r\n    },\r\n    {\r\n        \"op\": \"replace\",\r\n        \"path\": \"/connectionProperties/username\",\r\n        \"value\": \"ALP\"        \r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{hostname}}/api/v1/data-connections/{{connectionId}}",
+					"protocol": "https",
+					"host": [
+						"{{hostname}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"data-connections",
+						"{{connectionId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "hostname",
+			"value": ""
+		},
+		{
+			"key": "token",
+			"value": ""
+		},
+		{
+			"key": "spaceId",
+			"value": ""
+		},
+		{
+			"key": "s3accessKey",
+			"value": ""
+		},
+		{
+			"key": "s3secretKey",
+			"value": ""
+		},
+		{
+			"key": "s3bucketName",
+			"value": ""
+		},
+		{
+			"key": "s3region",
+			"value": ""
+		},
+		{
+			"key": "s3ConnectionId",
+			"value": ""
+		},
+		{
+			"key": "snowflakeConnectionId",
+			"value": ""
+		},
+		{
+			"key": "snowflakePassPhrase",
+			"value": ""
+		},
+		{
+			"key": "snowflakeEncodedValue",
+			"value": ""
+		},
+		{
+			"key": "bigQueryConnectionId",
+			"value": ""
+		},
+		{
+			"key": "bigQueryEncodedValue",
+			"value": ""
+		},
+		{
+			"key": "databricksToken",
+			"value": ""
+		},
+		{
+			"key": "connectionId",
+			"value": ""
+		},
+		{
+			"key": "rdbmsUsername",
+			"value": ""
+		},
+		{
+			"key": "rdbmsPassword",
+			"value": ""
+		},
+		{
+			"key": "gatewayId",
+			"value": ""
+		},
+		{
+			"key": "adlsclientappid",
+			"value": ""
+		},
+		{
+			"key": "adlsclientappkey",
+			"value": ""
+		},
+		{
+			"key": "mssqlUsername",
+			"value": ""
+		},
+		{
+			"key": "mssqlPassword",
+			"value": ""
+		}
+	]
+}
