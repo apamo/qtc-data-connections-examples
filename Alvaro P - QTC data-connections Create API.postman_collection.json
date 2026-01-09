@@ -8,6 +8,48 @@
 	},
 	"item": [
 		{
+			"name": "List Data Gateways",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://{{hostname}}/api/v1/replicate-agents",
+					"protocol": "https",
+					"host": [
+						"{{hostname}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"replicate-agents"
+					],
+					"query": [
+						{
+							"key": "sort",
+							"value": "%2Bname",
+							"disabled": true
+						},
+						{
+							"key": "filter",
+							"value": "name eq \"KJM054-QDIDemoDataGateway\"",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "List Connections",
 			"event": [
 				{
@@ -675,7 +717,7 @@
 			"response": []
 		},
 		{
-			"name": "Create S3 Target",
+			"name": "Create S3 Replication Target",
 			"event": [
 				{
 					"listen": "test",
@@ -705,7 +747,60 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"dataSourceId\": \"reptgt_qdis3\",\r\n    \"qName\": \"TGT_S3_AutoGen_02\",\r\n    \"space\": \"{{spaceId}}\",\r\n    \"connectionProperties\": {\r\n        \"agentId\": \"$$qlikManagedGateway$$\",\r\n        \"bucketName\": \"{{s3bucketName}}\",\r\n        \"s3AccessKey\": \"{{s3accessKey}}\",\r\n        \"s3SecretKey\": \"{{s3secretKey}}\",\r\n        \"useAwsPrivateLink\": false\r\n    }\r\n}",
+					"raw": "{\r\n    \"dataSourceId\": \"reptgt_qdis3\",\r\n    \"qName\": \"TGT_S3_AutoGen_06\",\r\n    \"space\": \"{{spaceId}}\",\r\n    \"connectionProperties\": {\r\n        \"agentId\": \"$$qlikManagedGateway$$\",\r\n        \"bucketName\": \"{{s3bucketName}}\",\r\n        \"s3AccessKey\": \"{{s3accessKey}}\",\r\n        \"s3SecretKey\": \"{{s3secretKey}}\",\r\n        //\"s3Region\": \"eu-west-1\",\r\n        \"useAwsPrivateLink\": false\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{hostname}}/api/v1/data-connections",
+					"protocol": "https",
+					"host": [
+						"{{hostname}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"data-connections"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create S3 for Qlik Cloud Target",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json();\r",
+							"pm.collectionVariables.set(\"connectionId\", responseJson.id);"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"dataSourceId\": \"File_AmazonS3ConnectorV2\",\r\n    \"qName\": \"TGT_S3_QC_AutoGen_01\",\r\n    \"space\": \"{{spaceId}}\",\r\n    \"connectionProperties\": {\r\n        //\"agentId\": \"$$qlikManagedGateway$$\",\r\n        \"bucketName\": \"{{s3bucketName}}\",\r\n        \"accessKey\": \"{{s3accessKey}}\",\r\n        \"secretKey\": \"{{s3secretKey}}\",\r\n        \"region\": \"{{s3region}}\"\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

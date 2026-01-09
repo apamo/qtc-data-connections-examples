@@ -23,6 +23,7 @@ The collection focuses on **connection creation and management only**, not on ta
 
 ### Core API operations
 
+- List existing data gateways (private call)
 - List existing data connections
 - Retrieve connection properties by ID
 - List available data sources (connectors)
@@ -43,7 +44,8 @@ The collection focuses on **connection creation and management only**, not on ta
 - Databricks (target, personal access token)
 - Google BigQuery (target, service account JSON)
 - Azure Data Lake Storage Gen2 (target)
-- Amazon S3 (target)
+- Amazon S3 (for replication target)
+- Amazon S3 (for Qlik Cloud target) --> This is a private call and is not supported. If you run it, you will receive a 201 Created status, but the item will not appear in the UI
 - Google Cloud Storage (target)
 
 ---
@@ -53,6 +55,7 @@ The collection focuses on **connection creation and management only**, not on ta
 The Postman collection is organized into:
 
 1. **Discovery endpoints**
+   - List data gateways (private call)
    - List data connections
    - List data sources
    - Retrieve data source API specifications
